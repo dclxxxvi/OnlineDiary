@@ -4,10 +4,8 @@ const ApiError = require('../error/ApiError');
 class TaskController {
   async create(req, res, next) {
     try {
-      const {name, description, startTime, endTime} = req.body;
-
-      const task = await Task.create({name, description, startTime, endTime});
-    
+      const {name, description, startTime, endTime, userId} = req.body;
+      const task = await Task.create({name, description, startTime, endTime, userId});
       return res.json(task);
     }
     catch (e) {
@@ -15,9 +13,8 @@ class TaskController {
     }
   }
 
-  async get(req, res) {
+  async getAll(req, res) {
     const tasks = await Task.findAll();
-
     return res.json(tasks);
   }
 }

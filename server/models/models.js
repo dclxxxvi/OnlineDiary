@@ -7,34 +7,18 @@ const User = sequelize.define('user', {
     password: {type: DataTypes.STRING},
 });
 
-const TaskList = sequelize.define('task_list', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
-})
-
-const UserTask = sequelize.define('user_task', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
-})
-
 const Task = sequelize.define('task', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING},
     description: {type: DataTypes.STRING},
-    start_time: {type: DataTypes.DATE},
-    end_time: {type: DataTypes.DATE},
+    startTime: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    endTime: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
 })
 
-User.hasOne(TaskList);
-TaskList.belongsTo(User);
-
-TaskList.hasMany(UserTask);
-UserTask.belongsTo(TaskList);
-
-Task.hasMany(UserTask);
-UserTask.belongsTo(Task);
+User.hasMany(Task);
+Task.belongsTo(User);
 
 module.exports = {
     User,
-    TaskList,
-    UserTask,
     Task
 }
