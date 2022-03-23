@@ -6,7 +6,7 @@ export const createTask = async (task) => {
     return data;
 }
 
-export const fetchTasks = async () => {
-    const {data} = await $host.get('api/task');
+export const fetchTasks = async (id) => {
+    const {data} = await $authHost.get('api/task/' + id);
     return data;
 }

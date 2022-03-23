@@ -3,8 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import TaskStore from './store/TaskStore';
 import UserStore from './store/UserStore';
+import jQuery from 'jquery'
 
 export const Context = createContext();
+
+jQuery.htmlPrefilter = function( html ) {
+	return html;
+};
 
 ReactDOM.render(
   <React.StrictMode>

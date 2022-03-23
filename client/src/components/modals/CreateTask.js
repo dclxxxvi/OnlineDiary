@@ -3,6 +3,7 @@ import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { observer } from "mobx-react-lite";
 import { Context } from '../..';
 import { createTask } from '../../http/taskAPI';
+import DateTimePickerModal from './DateTimePickerModal';
 
 const CreateTask = observer( ({show, onHide}) => {
   const {user} = useContext(Context);
@@ -12,6 +13,9 @@ const CreateTask = observer( ({show, onHide}) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  const [startTimePicker, setStartTimePicker] = useState(false);
+  const [endTimePicker, setEndTimePicker] = useState(false);
+
   const addTask = () => {
     const task = {
         "name": name,
@@ -20,7 +24,7 @@ const CreateTask = observer( ({show, onHide}) => {
         "endTime": endTime,
         "userId": user.User.id
     }
-    createTask(task).then(data => onHide())
+    createTask(task).then(data => onHide());
   }
   
   return ( 
@@ -31,6 +35,8 @@ const CreateTask = observer( ({show, onHide}) => {
     aria-labelledby="contained-modal-title-vcenter"
     centered
   >
+    <DateTimePickerModal show={startTimePicker} onHide={() => setStartTimePicker(false)} setDateTime={setStartTime}/>
+    <DateTimePickerModal show={endTimePicker} onHide={() => setEndTimePicker(false)} setDateTime={setEndTime}/>
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter">
         Создать задачу
@@ -66,6 +72,7 @@ const CreateTask = observer( ({show, onHide}) => {
               className="mt-3"
               placeholder={"Дата начала"}
               type="datetime"
+              onClick={() => setStartTimePicker(true)}
             />
           </Col>
           <Col>
@@ -75,6 +82,7 @@ const CreateTask = observer( ({show, onHide}) => {
               className="mt-3"        
               placeholder={"Дата окончания"}
               type="datetime"
+              onClick={() => setEndTimePicker(true)}
             />
           </Col>
         </Row>

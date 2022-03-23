@@ -1,17 +1,24 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import moment from 'moment';
 
 
 //Лист в котором будут высвечиваться таски за один конкретный день. 
 
-function TodoList({tasks}) {
+function TodoList({tasks, date}) {
     return (
-        <Card>
-            <Card.Header>TaskList</Card.Header>
+        <Card className="p-0">
+            <Card.Header>{date.format("MMMM D")}</Card.Header>
             <ListGroup>
                 {tasks.map((task) => {
-                    return (<ListGroupItem key={task.id}>
-                        {task.name}
+                    return (<ListGroupItem key={task.id} className="">
+                        <div className="row">
+                            <h5 className="col">{task.name}</h5>
+                            <div className="col">{moment(task.startTime).format("hh:mm")} - {moment(task.endTime).format("hh:mm")}</div>
+                        </div>
+                        <div className="row">
+                            <div className="col text-black-50 text-monospace">{task.description}</div>
+                        </div>
                     </ListGroupItem>
                 )})}
             </ListGroup>

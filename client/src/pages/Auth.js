@@ -26,7 +26,7 @@ const Auth = observer( () => {
             user.setIsAuth(true);
             navigate(MAIN_ROUTE);
         } catch (e) {
-            alert(e.message);
+            alert(e.response.data.message);
         }
     }
 
