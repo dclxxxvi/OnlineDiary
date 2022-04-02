@@ -19,7 +19,7 @@ const NavBar = observer(() => {
     return ( 
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="MAIN_ROUTE">
+                <Navbar.Brand href={MAIN_ROUTE}>
                     <img
                     alt=""
                     src="../assets/logo.svg"

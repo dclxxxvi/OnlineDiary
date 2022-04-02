@@ -5,9 +5,8 @@ import moment from "moment"
 
 function TaskCalendar({tasks}) {
 
-
   return ( 
-      <div className="row row-cols-md-6">
+      <div className="row">
         {Array.from({length: moment().daysInMonth()}, (x, i) => moment().startOf('month').add(i, 'days'))
           .map((day) => {
             return (

@@ -4,6 +4,7 @@ import App from './App';
 import TaskStore from './store/TaskStore';
 import UserStore from './store/UserStore';
 import jQuery from 'jquery'
+import './scss/custom.css'
 
 export const Context = createContext();
 

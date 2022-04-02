@@ -14,7 +14,7 @@ function TodoList({tasks, date}) {
                     return (<ListGroupItem key={task.id} className="">
                         <div className="row">
                             <h5 className="col">{task.name}</h5>
-                            <div className="col">{moment(task.startTime).format("hh:mm")} - {moment(task.endTime).format("hh:mm")}</div>
+                            <div className="col">{moment(task.startTime).format("HH:mm")} - {moment(task.endTime).format("HH:mm")}</div>
                         </div>
                         <div className="row">
                             <div className="col text-black-50 text-monospace">{task.description}</div>

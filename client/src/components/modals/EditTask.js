@@ -1,34 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { observer } from "mobx-react-lite";
-import { Context } from '../..';
-import { createTask } from '../../http/taskAPI';
 import DateTimePickerModal from './DateTimePickerModal';
+import { deleteTask, editTask, fetchTasks } from '../../http/taskAPI';
+import { Context } from '../..';
 
-const CreateTask = observer( ({show, onHide}) => {
+const EditTask = observer( ({show, onHide, task}) => {
+  const {tasks} = useContext(Context);
   const {user} = useContext(Context);
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDateTime, setStartDateTime] = useState("");
-  const [endDateTime, setEndDateTime] = useState("");
+  const [name, setName] = useState(task.name);
+  const [description, setDescription] = useState(task.description);
+  const [startDateTime, setStartDateTime] = useState(task.startDateTime);
+  const [endDateTime, setEndDateTime] = useState(task.endDateTime);
 
   const [startTimePicker, setStartTimePicker] = useState(false);
   const [endTimePicker, setEndTimePicker] = useState(false);
 
-  const addTask = () => {
-    const task = {
+  useEffect(() => {
+    setName(task.name);
+    setDescription(task.description);
+    setStartDateTime(task.startTime);
+    setEndDateTime(task.endTime);
+  }, [show])
+
+  const editThisTask = () => {
+    const edittedTask = {
         "name": name,
         "description": description,
         "startTime": startDateTime,
         "endTime": endDateTime,
-        "userId": user.User.id
+        "userId": task.userId
     }
+    console.log(edittedTask);
     if (name === "") {
       alert("Введите название задачи");
       return;
     }
-    createTask(task).then(data => onHide());
+    editTask(task.id, edittedTask).then(data => onHide());
+    fetchTasks(user.User.id).then(data => tasks.setTaskList(data));
+  }
+
+  const deleteThisTask = () => {
+    deleteTask(task.id).then(data => onHide());
+    fetchTasks(user.User.id).then(data => tasks.setTaskList(data));
   }
 
   const setEndTime = (value) => {
@@ -55,7 +70,7 @@ const CreateTask = observer( ({show, onHide}) => {
     <DateTimePickerModal show={endTimePicker} onHide={() => setEndTimePicker(false)} setDateTime={setEndTime}/>
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter">
-        Создать задачу
+        Редактировать задачу
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
@@ -105,11 +120,11 @@ const CreateTask = observer( ({show, onHide}) => {
       </Form>
     </Modal.Body>
     <Modal.Footer>
-      <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-      <Button variant="outline-success" onClick={addTask}>Добавить</Button>
+      <Button variant="outline-danger" onClick={deleteThisTask}>Удалить</Button>
+      <Button variant="outline-success" onClick={editThisTask}>Принять</Button>
     </Modal.Footer>
   </Modal>
     );
 })
 
-export default CreateTask;
+export default EditTask;

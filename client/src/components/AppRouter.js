@@ -3,11 +3,8 @@ import { Routes, Route, Redirect } from 'react-router-dom';
 import { Context } from '../index';
 import Auth from '../pages/Auth';
 import Main from '../pages/Main';
-import Task from '../pages/Task';
-import TaskList from '../pages/TaskList';
-import User from '../pages/User';
-import { authRoutes, publicRoutes } from '../routes';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, TASKLIST_ROUTE, TASK_ROUTE, USER_ROUTE } from '../utils/constants';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, TASKLIST_ROUTE, TASK_ROUTE, USER_ROUTE, WEEKS_TASKS_ROUTE } from '../utils/constants';
+import UserRouter from './UserRouter';
 
 function AppRouter() {
     const {user} = useContext(Context);
@@ -17,7 +14,7 @@ function AppRouter() {
         <Routes>
             <Route path={LOGIN_ROUTE} element={<Auth />} />
             <Route path={REGISTRATION_ROUTE} element={<Auth />} />
-            <Route path={USER_ROUTE} element={<User />} />
+            <Route path={USER_ROUTE+"/*"} element={<UserRouter />} />
             <Route path="*" element={<Main />} />
         </Routes>
     );
