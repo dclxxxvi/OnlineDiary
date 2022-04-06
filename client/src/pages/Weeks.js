@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '..';
 import moment from 'moment';
 import { Button, Row } from 'react-bootstrap';
-import WeekTasks from './WeekTasks';
+import WeekTasks from '../components/WeekTasks';
 
 const Weeks = observer(() => {
   const {tasks} = useContext(Context);
@@ -14,20 +14,20 @@ const Weeks = observer(() => {
     <div>
       <Row className="d-flex justify-content-center">
         <Button 
-          variant="primary border border-dark" 
-          className="mx-2 col col-1" 
+          variant="primary" 
+          className="mx-2 col col-1 text-white" 
           onClick={() => setWeek(moment(week).subtract(1, 'w'))}>
             Предыдущая
           </Button>
         <Button 
-          variant="primary border border-dark" 
-          className="mx-2 col col-1" 
+          variant="primary" 
+          className="mx-2 col col-1 text-white" 
           onClick={() => setWeek(moment())}>
             Текущая
           </Button>
         <Button 
-          variant="primary border border-dark" 
-          className="mx-2 col col-1" 
+          variant="primary" 
+          className="mx-2 col col-1 text-white" 
           onClick={() => setWeek(moment(week).add(1, 'w'))}>
             Следующая
           </Button>

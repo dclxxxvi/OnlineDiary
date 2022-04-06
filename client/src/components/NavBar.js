@@ -21,13 +21,12 @@ const NavBar = observer(() => {
             <Container>
                 <Navbar.Brand href={MAIN_ROUTE}>
                     <img
-                    alt=""
-                    src="../assets/logo.svg"
-                    width="30"
-                    height="30"
-                    className="d-inline-block align-top"
-                    />{' '}
-                Тудуду
+                    src="/assets/logo.png"
+                    width="30px"
+                    height="30px"
+                    className="d-inline-block align-top mx-2"
+                    />
+                    Тудуду
                 </Navbar.Brand>
                 {user.IsAuth ?
                     <Nav className="ml-auto">

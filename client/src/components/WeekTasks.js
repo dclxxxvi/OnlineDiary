@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Context } from '..';
 import moment from 'moment';
 import { Col, Row } from 'react-bootstrap';
-import EditTask from '../components/modals/EditTask';
+import EditTask from './modals/EditTask';
 
 const WeekTasks = ({week, tasks}) => {
   
@@ -23,7 +23,7 @@ const WeekTasks = ({week, tasks}) => {
     //новый вариант на таблице
     <div className="table-responsive my-3">
       <table className="table table-sm table-hover">
-        <thead className="bg-light-gray">
+        <thead className="bg-primary text-white">
           <tr>
             <th></th>
             {moment.weekdays().map((day) => {
