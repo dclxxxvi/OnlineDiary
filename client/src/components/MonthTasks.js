@@ -43,12 +43,12 @@ const MonthTasks = ({month, tasks}) => {
                       return  makeDateTime(week, day).add(23,'h').isAfter(task.startTime) &&
                               makeDateTime(week, day).isBefore(task.endTime)
                     })
-                    .sort((a, b) => a.startTime - b.startTime)
+                    .sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
                     .map((task) => {
                       return <Row 
                       className='bg-success bg-opacity-50 pb-2'
                       onClick={() => editTask(task)}>
-                        <Row className="mx-1 p-0 fw-light text-black">{moment(task.startTime).format('HH:MM')}-{moment(task.endTime).format('HH:MM')}</Row> 
+                        <Row className="mx-1 p-0 fw-light text-black">{moment(task.startTime).format('DD MMM HH:MM')} - {moment(task.endTime).format('DD MMM HH:MM')}</Row> 
                         <Row className="mx-1 text-black fs-5">{task.name}</Row>
                       </Row>
                     })

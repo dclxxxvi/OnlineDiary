@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { observer } from "mobx-react-lite";
 import { Context } from '../..';
-import { createTask } from '../../http/taskAPI';
+import { createTask, fetchTasks } from '../../http/taskAPI';
 import DateTimePickerModal from './DateTimePickerModal';
 
 const CreateTask = observer( ({show, onHide}) => {
   const {user} = useContext(Context);
+  const {tasks} = useContext(Context);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +29,11 @@ const CreateTask = observer( ({show, onHide}) => {
       alert("Введите название задачи");
       return;
     }
-    createTask(task).then(data => onHide());
+
+    createTask(task).then(data => {
+      fetchTasks(user.User.id).then(data => tasks.setTaskList(data))
+      onHide()
+      })
   }
 
   const setEndTime = (value) => {

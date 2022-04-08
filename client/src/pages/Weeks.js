@@ -10,39 +10,25 @@ const Weeks = observer(() => {
 
   const [week, setWeek] = useState(moment());
 
+  const nextWeek = () => {
+    setWeek(moment(week).add(1, 'w'))
+  }
+
+  const previousWeek = () => {
+    setWeek(moment(week).subtract(1, 'w'))
+  }
+
   return ( 
-    <div>
-      <Row className="d-flex justify-content-center">
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setWeek(moment(week).subtract(1, 'w'))}>
-            Предыдущая
-          </Button>
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setWeek(moment())}>
-            Текущая
-          </Button>
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setWeek(moment(week).add(1, 'w'))}>
-            Следующая
-          </Button>
-      </Row>
-      <Row>
         <WeekTasks 
           week={week} 
+          nextWeek={nextWeek}
+          previousWeek={previousWeek}
           tasks={
             tasks.TaskList.filter((task) => {
               return week.isAfter(moment(task.startTime)) &&
                 moment(week).subtract(1, 'w').isBefore(moment(task.endTime))
             })
           }/>
-      </Row>
-    </div>
     );
 })
 

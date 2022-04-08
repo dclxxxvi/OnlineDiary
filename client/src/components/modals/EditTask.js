@@ -32,19 +32,20 @@ const EditTask = observer( ({show, onHide, task}) => {
         "endTime": endDateTime,
         "userId": task.userId
     }
-    console.log(edittedTask);
     if (name === "") {
       alert("Введите название задачи");
       return;
     }
-    editTask(task.id, edittedTask).then(data => onHide());
-    fetchTasks(user.User.id).then(data => tasks.setTaskList(data));
-  }
+    editTask(task.id, edittedTask).then(data => {
+      fetchTasks(user.User.id).then(data => tasks.setTaskList(data))
+      onHide()
+      })}
 
   const deleteThisTask = () => {
-    deleteTask(task.id).then(data => onHide());
-    fetchTasks(user.User.id).then(data => tasks.setTaskList(data));
-  }
+    deleteTask(task.id).then(data => {
+      fetchTasks(user.User.id).then(data => tasks.setTaskList(data))
+      onHide()
+    })}
 
   const setEndTime = (value) => {
     if (startDateTime == "") {

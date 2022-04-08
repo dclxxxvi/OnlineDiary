@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Col, Row } from 'react-bootstrap';
 import EditTask from './modals/EditTask';
 
-const WeekTasks = ({week, tasks}) => {
+const WeekTasks = observer(({week, tasks, nextWeek, previousWeek}) => {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState({});
@@ -25,10 +25,11 @@ const WeekTasks = ({week, tasks}) => {
       <table className="table table-sm table-hover">
         <thead className="bg-primary text-white">
           <tr>
-            <th></th>
+            <th className="fs-5" onClick={() => previousWeek()}>&larr;</th>
             {moment.weekdays().map((day) => {
               return <th>{makeDateTime(day, 0).format('dddd DD.MM')}</th>;
             })}
+            <th className="fs-5" onClick={() => nextWeek()}>&rarr;</th>
           </tr>
         </thead>
         <tbody>
@@ -103,6 +104,6 @@ const WeekTasks = ({week, tasks}) => {
 
 
    );
-}
+})
 
 export default WeekTasks;
