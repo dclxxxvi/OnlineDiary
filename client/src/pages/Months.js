@@ -10,33 +10,16 @@ const Months = observer(() => {
 
   const [month, setMonth] = useState(moment().date(1));
 
+  const nextMonth = () => setMonth(moment(month).add(1, 'M'));
+  const previousMonth = () => setMonth(moment(month).subtract(1, 'M'));
+
   return ( 
     <div>
-      <Row className="d-flex justify-content-center">
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setMonth(moment(month).subtract(1, 'M'))}>
-            Предыдущий
-          </Button>
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setMonth(moment())}>
-            Текущий
-          </Button>
-        <Button 
-          variant="primary" 
-          className="mx-2 col col-1 text-white" 
-          onClick={() => setMonth(moment(month).add(1, 'M'))}>
-            Следующий
-          </Button>
-      </Row>
-      <Row>
         <MonthTasks 
           month={month} 
+          previousMonth={previousMonth}
+          nextMonth={nextMonth}
           tasks={tasks.TaskList}/>
-      </Row>
     </div>
     );
 })

@@ -15,9 +15,7 @@ const WeekTasks = observer(({week, tasks, nextWeek, previousWeek}) => {
     setTaskToEdit(task);
   }
 
-  const makeDateTime = (dayOfWeek, hour) => {
-    return week.second(0).minute(0).hour(hour).day(dayOfWeek);
-  }
+  const makeDateTime = (dayOfWeek, hour) =>  week.second(0).minute(0).hour(hour).day(dayOfWeek);
 
   return ( 
     //новый вариант на таблице
@@ -25,11 +23,11 @@ const WeekTasks = observer(({week, tasks, nextWeek, previousWeek}) => {
       <table className="table table-sm table-hover">
         <thead className="bg-primary text-white">
           <tr>
-            <th className="fs-5" onClick={() => previousWeek()}>&larr;</th>
+            <th className="ps-3" role="button" onClick={() => previousWeek()}>&lt;</th>
             {moment.weekdays().map((day) => {
               return <th>{makeDateTime(day, 0).format('dddd DD.MM')}</th>;
             })}
-            <th className="fs-5" onClick={() => nextWeek()}>&rarr;</th>
+            <th className="pe-1" role="button" onClick={() => nextWeek()}>&gt;</th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +44,7 @@ const WeekTasks = observer(({week, tasks, nextWeek, previousWeek}) => {
                       .map((task) => {
                           return <Row 
                           className="px-1 bg-success bg-opacity-50"
+                          role="button"
                           onClick={() => editTask(task)}
                           >{task.name}</Row>;
                       })}

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
-import { Container, Button, Row, Col } from 'react-bootstrap';
+import { Container, Button, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 import { Context } from '../index';
 import CreateTask from '../components/modals/CreateTask';
 import { fetchTasks } from '../http/taskAPI';
@@ -20,10 +20,12 @@ const User = observer( () => {
     return (  
         <Container>
             <Row>
-                <Button variant="outline-dark" className="m-4 col" onClick={() => setModalVisible(true)}>Добавить задачу</Button>
-                <Button variant="outline-dark" className="m-4 col" onClick={() => navigate(USER_ROUTE + ALL_TASKS_ROUTE)}>Список задач</Button>
-                <Button variant="outline-dark" className="m-4 col" onClick={() => navigate(USER_ROUTE + WEEKS_TASKS_ROUTE)}>Недели</Button>
-                <Button variant="outline-dark" className="m-4 col" onClick={() => navigate(USER_ROUTE + MONTHS_TASKS_ROUTE)}>Месяца</Button>
+                <Button variant="outline-dark" className="m-3 col col-2" onClick={() => setModalVisible(true)}>Добавить задачу</Button>
+                <Button variant="outline-dark" className="m-3 col col-2" onClick={() => navigate(USER_ROUTE + ALL_TASKS_ROUTE)}>Список задач</Button>
+                <DropdownButton variant="outline-dark" className="m-3 col col-1" title="Отображение ">
+                    <Dropdown.Item onClick={() => navigate(USER_ROUTE + WEEKS_TASKS_ROUTE)}>Недели</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate(USER_ROUTE + MONTHS_TASKS_ROUTE)}>Месяца</Dropdown.Item>
+                </DropdownButton> 
             </Row>
             <CreateTask show={modalVisible} onHide={() => setModalVisible(false)} />
         </Container>

@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Col, Row } from 'react-bootstrap';
 import EditTask from './modals/EditTask';
 
-const MonthTasks = ({month, tasks}) => {
+const MonthTasks = ({month, tasks, previousMonth, nextMonth}) => {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState({});
@@ -25,14 +25,16 @@ const MonthTasks = ({month, tasks}) => {
         <caption className="caption-top px-2"><h1>{month.format("MMMM YYYY")}</h1></caption>
         <thead className="bg-primary text-white">
           <tr>
+            <th className="px-3" role="button" onClick={() => previousMonth()}>&lt;</th>
             {moment.weekdays().map((day) => {
               return <th>{day}</th>;
             })}
+            <th className="px-3" role="button" onClick={() => nextMonth()}>&gt;</th>
           </tr>
         </thead>
         <tbody>
           {Array.from(Array(6).keys()).map((week) => {
-            return <tr>
+            return <tr><td></td>
               {moment.weekdays().map((day) => {
                 return <td className='px-3'>
                   <Row className="fw-bold fs-5 mb-2">
@@ -47,6 +49,7 @@ const MonthTasks = ({month, tasks}) => {
                     .map((task) => {
                       return <Row 
                       className='bg-success bg-opacity-50 pb-2'
+                      role="button"
                       onClick={() => editTask(task)}>
                         <Row className="mx-1 p-0 fw-light text-black">{moment(task.startTime).format('DD MMM HH:MM')} - {moment(task.endTime).format('DD MMM HH:MM')}</Row> 
                         <Row className="mx-1 text-black fs-5">{task.name}</Row>
@@ -54,6 +57,7 @@ const MonthTasks = ({month, tasks}) => {
                     })
                 }</td>
               })}
+              <td></td>
             </tr>
           })}
         </tbody>
