@@ -22,8 +22,9 @@ const AllTasks = observer(() => {
         return <Row 
           className="m-2 bg-success bg-opacity-50"
           onClick={() => editTask(task)}
+          role="button"
         >
-          <Col className="col-4 m-1">
+          <Col className="col-4 m-1 text-capitalize">
             <Row className="fw-bold">{moment(task.startTime).format("MMMM D YYYY, hh:mm")}</Row>
             <Row className="fw-bold">{moment(task.endTime).format("MMMM D YYYY, hh:mm")}</Row>
           </Col>

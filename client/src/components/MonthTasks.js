@@ -22,12 +22,12 @@ const MonthTasks = ({month, tasks, previousMonth, nextMonth}) => {
   return ( 
     <div className="table-responsive my-3">
       <table className="table table-sm table-hover">
-        <caption className="caption-top px-2"><h1>{month.format("MMMM YYYY")}</h1></caption>
+        <caption className="caption-top px-2 text-capitalize"><h1>{month.format("MMMM YYYY")}</h1></caption>
         <thead className="bg-primary text-white">
           <tr>
             <th className="px-3" role="button" onClick={() => previousMonth()}>&lt;</th>
-            {moment.weekdays().map((day) => {
-              return <th>{day}</th>;
+            {moment.weekdays(true).map((day) => {
+              return <th className='text-capitalize'>{day}</th>;
             })}
             <th className="px-3" role="button" onClick={() => nextMonth()}>&gt;</th>
           </tr>
@@ -35,7 +35,7 @@ const MonthTasks = ({month, tasks, previousMonth, nextMonth}) => {
         <tbody>
           {Array.from(Array(6).keys()).map((week) => {
             return <tr><td></td>
-              {moment.weekdays().map((day) => {
+              {moment.weekdays(true).map((day) => {
                 return <td className='px-3'>
                   <Row className="fw-bold fs-5 mb-2">
                     {makeDateTime(week, day).format("D")}

@@ -7,7 +7,6 @@ import AppRouter from './components/AppRouter';
 import NavBar from './components/NavBar';
 import { check } from './http/userAPI';
 
-
 const App = observer( () => {
   const {user} = useContext(Context);
   const [loading, setLoading] = useState(true);
@@ -24,7 +23,7 @@ const App = observer( () => {
   }
 
   return (
-   <BrowserRouter>
+  <BrowserRouter>
     <NavBar />
     <AppRouter />
   </BrowserRouter>

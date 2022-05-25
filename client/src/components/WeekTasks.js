@@ -24,8 +24,8 @@ const WeekTasks = observer(({week, tasks, nextWeek, previousWeek}) => {
         <thead className="bg-primary text-white">
           <tr>
             <th className="ps-3" role="button" onClick={() => previousWeek()}>&lt;</th>
-            {moment.weekdays().map((day) => {
-              return <th>{makeDateTime(day, 0).format('dddd DD.MM')}</th>;
+            {moment.weekdays(true).map((day) => {
+              return <th className='text-capitalize'>{makeDateTime(day, 0).format('dddd DD.MM')}</th>;
             })}
             <th className="pe-1" role="button" onClick={() => nextWeek()}>&gt;</th>
           </tr>

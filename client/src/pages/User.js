@@ -19,12 +19,15 @@ const User = observer( () => {
 
     return (  
         <Container>
+            <Row className="my-3">
+                <div className="my-3 fs-4 fw-bold">Вы вошли как: {user.User?.email}</div>
+            </Row>
             <Row>
                 <Button variant="outline-dark" className="m-3 col col-2" onClick={() => setModalVisible(true)}>Добавить задачу</Button>
-                <Button variant="outline-dark" className="m-3 col col-2" onClick={() => navigate(USER_ROUTE + ALL_TASKS_ROUTE)}>Список задач</Button>
+                <Button variant="outline-dark" className="m-3 col col-2" onClick={() => navigate('/user/all_tasks')}>Список задач</Button>
                 <DropdownButton variant="outline-dark" className="m-3 col col-1" title="Отображение ">
-                    <Dropdown.Item onClick={() => navigate(USER_ROUTE + WEEKS_TASKS_ROUTE)}>Недели</Dropdown.Item>
-                    <Dropdown.Item onClick={() => navigate(USER_ROUTE + MONTHS_TASKS_ROUTE)}>Месяца</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate('/user/weeks')}>Недели</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate('/user/months')}>Месяца</Dropdown.Item>
                 </DropdownButton> 
             </Row>
             <CreateTask show={modalVisible} onHide={() => setModalVisible(false)} />

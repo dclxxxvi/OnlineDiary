@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import User from '../pages/User';
 import Months from '../pages/Months';
 import Weeks from '../pages/Weeks';
@@ -8,17 +8,13 @@ import AllTasks from '../pages/AllTasks';
 
 
 
-function UserRouter() {
+function UserLayout() {
   return ( 
     <div>
       <User />
-      <Routes>
-        <Route path={WEEKS_TASKS_ROUTE} element={<Weeks />} />
-        <Route path={MONTHS_TASKS_ROUTE} element={<Months />} />
-        <Route path={ALL_TASKS_ROUTE} element={<AllTasks />} />
-      </Routes>
+      <Outlet />
     </div>
    );
 }
 
-export default UserRouter;
+export default UserLayout;

@@ -1,10 +1,67 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Row, FloatingLabel, Col } from 'react-bootstrap';
+import moment from 'moment';
+
+// function DatePickerPart({date, setDate}) {
+
+//   const makeDay = (week, day) => {
+//     return moment(date.date(1)).add(week, 'w').day(day);
+//   }
+
+//   return (
+//     <table className="table">
+//       <caption className="caption-top px-2 text-capitalize">
+//         <Row>
+//           <Col className="px-3" role="button" onClick={() => setDate(moment(date).subtract(1, 'M'))}>
+//             &lt;
+//           </Col>
+//           <Col>
+//             {date.format("MMMM YYYY")}
+//           </Col>
+//           <Col className="px-3" role="button" onClick={() => setDate(moment(date).add(1, 'M'))}>
+//             &gt;
+//           </Col>
+//         </Row>
+//       </caption>
+//       <thead className="bg-primary text-white">
+//         <tr>
+//           {moment.weekdays(true).map((day) => {
+//             return <th className='text-capitalize'>{makeDay(1, day).format('dd')}</th>;
+//           })}
+//         </tr>
+//       </thead>
+//       <tbody>
+//         {Array.from(Array(6).keys()).map((week) => {
+//           return <tr>
+//               {moment.weekdays().map((day) => {
+//                 return (
+//                   (moment().month() === moment(makeDay(week, day)).month()) ?
+//                     (moment().date() === moment(makeDay(week, day).date())) ?
+//                     <td className="p-0 bg-success bg-opacity-50" role="button" onClick={() => setDate(makeDay(week, day))}>
+//                       {makeDay(week, day).format("D")}
+//                     </td>
+//                     :
+//                     <td className="p-0 bg-light bg-opacity-50" role="button" onClick={() => setDate(makeDay(week, day))}>
+//                       {makeDay(week, day).format("D")}
+//                     </td>
+//                   :
+//                   <td className="p-0 bg-secondary bg-opacity-50" role="button" onClick={() => setDate(makeDay(week, day))}>
+//                     {makeDay(week, day).format("D")}
+//                   </td>
+//                 )
+//               })}
+//             </tr>
+//         })}
+//       </tbody>
+//     </table>
+//   )
+// }
+
 
 function DateTimePickerModal({show, onHide, setDateTime}) {
 
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [date, setDate] = useState(moment());
+  const [time, setTime] = useState(moment());
 
   const onClick = () => {
     onHide();
